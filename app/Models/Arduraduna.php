@@ -14,7 +14,7 @@ class Arduraduna extends Model
     protected $primaryKey = "arduradunID";
 
     protected $fillable = [
-        'rduradunID',
+        'arduradunID',
         'izena',
         'abizena',
         'email',
