@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string("izena", 100);
             $table->text("deskribapena");
             $table->unsignedInteger("stock");
+
+            // Hornitzailearen ID-a FK moduan ezarri
+            $table->foreignId("hornitzaileID")->constrained("hornitzaileas", "hornitzaileID")->onDelete("null");
             $table->timestamps();
         });
     }
