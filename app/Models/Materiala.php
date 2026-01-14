@@ -12,4 +12,8 @@ class Materiala extends Model
     protected $table = "materialas";
     protected $primaryKey = "materialID";
 
+    protected $fillable = [
+
+
+    ];
 }

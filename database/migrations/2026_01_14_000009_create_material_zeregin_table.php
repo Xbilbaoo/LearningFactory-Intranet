@@ -16,6 +16,7 @@ return new class extends Migration
             // Bi tauletatik foreign key-ak hartu
             $table->foreignId('materialID')->constrained('materialas', 'materialID')->onDelete('restrict');
             $table->foreignId('zereginID')->constrained('zereginID', 'zereginas')->onDelete('cascade');
+            $table->unsignedInteger('kantitatea');
 
             // Primary Key-a ezarri
             $table->primary(['materialID', 'zereginID']);
