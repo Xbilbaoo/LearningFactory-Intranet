@@ -19,10 +19,6 @@ class Fasea extends Model
         'deskribapena'
     ];
 
-    /*public function zerginakDitu(): HasMany
-    {
-
-        return $this->hasMany(Zeregina::class);
-    }*/
+    public function zerginakDitu(): HasMany { return $this->hasMany(Zeregina::class); }
 
 }

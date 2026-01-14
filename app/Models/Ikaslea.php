@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Ikaslea extends Model
 {
@@ -22,8 +23,5 @@ class Ikaslea extends Model
         'rola'
     ];
 
-    public function taldekoaDa()
-    {
-        return $this->belongsTo(Taldea::class);
-    }
+    public function taldekoaDa(): BelongsTo { return $this->belongsTo(Taldea::class); }
 }

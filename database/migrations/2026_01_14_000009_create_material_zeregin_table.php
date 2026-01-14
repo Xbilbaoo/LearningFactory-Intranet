@@ -20,7 +20,6 @@ return new class extends Migration
 
             // Primary Key-a ezarri
             $table->primary(['materialID', 'zereginID']);
-
             $table->timestamps();
         });
     }

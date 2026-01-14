@@ -12,7 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('zereginas', function (Blueprint $table) {
-            $table->id();
+            $table->id("zereginID");
+            $table->string("izena", 200);
+            $table->text("deskribapena");
+            $table->unsignedInteger("estimazioa");
+            $table->date("hasieraData");
+            $table->date("amaieraData");
+            $table->unsignedInteger("zereginPosizioa");
+            $table->enum("status", ['Pendiente', 'Abian', 'Eginda'])->default('Pendiente');
+            $table->foreignId("taldeID")->constrained("taldeas", "taldeID")->onDelete("restrict");
+            $table->foreignId("arduradunID")->constrained("arduradunas", "arduradunID")->onDelete("restrict");
+            $table->foreignId("faseID")->constrained("faseas", "faseID")->onDelete("restrict");
             $table->timestamps();
         });
     }

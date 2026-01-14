@@ -23,9 +23,5 @@ class Hornitzailea extends Model
         'telefonoa'
     ];
 
-    public function materialaSaldu() : HasOne {
-
-        return $this->hasOne(Materiala::class);
-
-    }
+    public function materialaSaldu() : HasOne { return $this->hasOne(Materiala::class); }
 }

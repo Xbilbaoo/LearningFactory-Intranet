@@ -26,9 +26,5 @@ class Taldea extends Model
         return $this->hasMany(Ikaslea::class);
     }
 
-    /*public function zereginakEgin(): HasMany
-    {
-
-        return $this->hasMany(Zeregina::class);
-    }*/
+    public function zereginakEgin(): HasMany { return $this->hasMany(Zeregina::class); }
 }

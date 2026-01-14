@@ -22,9 +22,5 @@ class Arduraduna extends Model
         'rola'
     ];
 
-    /*public function zereginakDitu(): HasMany
-    {
-
-        return $this->hasMany(Zeregina::class);
-    }*/
+    public function zereginakDitu(): HasMany { return $this->hasMany(Zeregina::class); }
 }
