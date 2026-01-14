@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id("taldeID");
             $table->string("Izena");
             $table->string("Deskripzioa");
+            $table->timestamps();
         });
     }
 
