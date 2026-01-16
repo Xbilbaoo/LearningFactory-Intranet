@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('arduradunas', function (Blueprint $table) {
-            $table->id();
+        Schema::create('faseas', function (Blueprint $table) {
+            $table->id("faseID");
+            $table->string("izena", 100);
+            $table->text("deskribapena")->nullable();
             $table->timestamps();
+
         });
     }
 
@@ -22,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('arduradunas');
+        Schema::dropIfExists('faseas');
     }
 };

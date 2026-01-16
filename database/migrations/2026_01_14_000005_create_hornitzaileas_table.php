@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('taldeas', function (Blueprint $table) {
-            $table->id("taldeID");
-            $table->string("Izena");
-            $table->string("Deskribapena");
+        Schema::create('hornitzaileas', function (Blueprint $table) {
+            $table->id("hornitzaileID");
+            $table->string("izena", 100);
+            $table->string("cif", 50);
+            $table->string("email", 100)->unique();
+            $table->text("helbidea");
+            $table->string("telefonoa", 100);
             $table->timestamps();
         });
     }
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('taldeas');
+        Schema::dropIfExists('hornitzaileas');
     }
 };
