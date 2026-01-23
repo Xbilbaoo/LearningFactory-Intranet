@@ -15,9 +15,7 @@ return new class extends Migration
             $table->id("arduradunID");
             $table->string("izena", 100);
             $table->string("abizena", 100);
-            $table->string("email", 100)->unique();
-            $table->string("pasahitza", 255);
-            $table->enum("Rola", ["Arduraduna", "Admin"])->default("Arduraduna");
+            $table->foreignId('userID')->constrained('users', 'userID')->onDelete('restrict');
             $table->timestamps();
         });
     }
