@@ -18,10 +18,9 @@ class Ikaslea extends Model
         'ikasleID',
         'izena',
         'abizena',
-        'email',
-        'pasahitza',
-        'rola'
     ];
 
     public function taldekoaDa(): BelongsTo { return $this->belongsTo(Taldea::class); }
+
+    public function erabiltzaileaDa(): BelongsTo { return $this->belongsTo(User::class); }
 }

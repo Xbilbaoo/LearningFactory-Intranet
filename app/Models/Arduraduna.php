@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Arduraduna extends Model
@@ -16,11 +17,11 @@ class Arduraduna extends Model
     protected $fillable = [
         'arduradunID',
         'izena',
-        'abizena',
-        'email',
-        'pasahitza',
-        'rola'
+        'abizena'
     ];
 
     public function zereginakDitu(): HasMany { return $this->hasMany(Zeregina::class); }
+
+    public function erabiltzaileaDa(): BelongsTo { return $this->belongsTo(User::class); }
+
 }
