@@ -17,7 +17,7 @@ class Taldea extends Model
     protected $fillable = [
         'taldeID',
         'izena',
-        'Deskribapena'
+        'deskribapena'
     ];
 
     public function ikasleaDitu(): HasMany

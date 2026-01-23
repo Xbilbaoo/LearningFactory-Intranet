@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string("pasahitza", 255);
             $table->string("rola")->default("ikaslea");
             $table->foreignId("taldeID")->constrained("taldeas", "taldeID")->onDelete("restrict");
+            $table->foreignId('userID')->constrained('users', 'userID')->onDelete('restrict');
             $table->timestamps();
         });
     }
