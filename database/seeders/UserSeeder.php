@@ -22,5 +22,21 @@ class UserSeeder extends Seeder
             'role' => 'admin',
             'email_verified_at' => now()
         ]);
+
+        User::create([
+
+            'email' => 'arduraduna@prueba.com',
+            'password' => 'password123', // Se encriptará automático por el cast en tu modelo
+            'role' => 'arduraduna',
+            'email_verified_at' => now()
+        ]);
+
+        User::create([
+
+            'email' => 'ikaslea@prueba.com',
+            'password' => 'password123', // Se encriptará automático por el cast en tu modelo
+            'role' => 'ikaslea',
+            'email_verified_at' => now()
+        ]);
     }
 }

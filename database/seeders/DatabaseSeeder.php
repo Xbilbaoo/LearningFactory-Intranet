@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             FaseaSeeder::class,
             TaldeaSeeder::class,
-            UserSeeder::class
+            UserSeeder::class,
+            IkasleaSeeder::class
         ]);
     }
 }
