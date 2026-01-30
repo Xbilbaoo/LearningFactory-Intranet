@@ -104,7 +104,7 @@ class ZereginaController extends Controller
         $taldeak = Taldea::all();
         $arduradunak = Arduraduna::all();
 
-        return view('zereginak.edit', compact('faseak', 'taldeak', 'arduradunak'));
+        return view('zereginak.edit', compact('zeregina', 'faseak', 'taldeak', 'arduradunak'));
     }
 
     /**
