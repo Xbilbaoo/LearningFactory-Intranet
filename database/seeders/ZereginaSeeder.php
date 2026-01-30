@@ -13,19 +13,24 @@ class ZereginaSeeder extends Seeder
 {
     public function run(): void
     {
-        // Buscamos los IDs para no fallar
-        $faseSents = Fasea::where('izena', 'Sentsibilizazioa')->first()->faseID ?? 1;
-        $faseDis   = Fasea::where('izena', 'Diseinua')->first()->faseID ?? 1;
-        $faseMerk  = Fasea::where('izena', 'Merkataritza')->first()->faseID ?? 1;
-        $faseProz  = Fasea::where('izena', 'Prozesua')->first()->faseID ?? 1;
+        // Función auxiliar segura: Si no encuentra el nombre, devuelve el ID 1
+        // Usamos el operador ?-> para que no falle si es null
+        $getFaseID = function($nombre) {
+            return Fasea::where('izena', $nombre)->first()?->faseID ?? 1;
+        };
 
-        // Función auxiliar para buscar ID de grupo por nombre (o devolver el 1 si no existe)
         $getTaldeID = function($nombre) {
-            return Taldea::where('izena', $nombre)->first()->taldeID ?? 1;
+            return Taldea::where('izena', 'LIKE', "%{$nombre}%")->first()?->taldeID ?? 1;
         };
         
-        // Cogemos un responsable aleatorio para rellenar el dato
-        $randomArduradunID = Arduraduna::first()->arduradunID ?? 1;
+        // Cogemos el primer responsable que exista, o el 1 si falla
+        $randomArduradunID = Arduraduna::first()?->arduradunID ?? 1;
+
+        // IDs seguros de fases
+        $faseSents = $getFaseID('Sentsibilizazioa');
+        $faseDis   = $getFaseID('Diseinua');
+        $faseMerk  = $getFaseID('Merkataritza');
+        $faseProz  = $getFaseID('Prozesua');
 
         $zereginak = [
             // --- Sentsibilizazioa ---
@@ -33,7 +38,7 @@ class ZereginaSeeder extends Seeder
                 'izena' => 'SCLF proiektua ezagutu',
                 'deskribapena' => 'Urte hasieran Zornotza SCLF precious plastic makina bisitatu.',
                 'faseID' => $faseSents,
-                'taldeaID' => $getTaldeID('SCLF Arduradunak'),
+                'taldeaID' => $getTaldeID('SCLF'),
                 'hasieraData' => '2025-10-01', 'amaieraData' => '2025-10-07'
             ],
             // --- Diseinua ---
@@ -70,7 +75,7 @@ class ZereginaSeeder extends Seeder
                 'izena' => 'WEB ORRIA sortu',
                 'deskribapena' => 'SCLF proiektuaren web orria garatu eta inplementatu.',
                 'faseID' => $faseMerk,
-                'taldeaID' => $getTaldeID('2AW3'), // ¡ESTE ES TU GRUPO!
+                'taldeaID' => $getTaldeID('2AW3'), 
                 'hasieraData' => '2025-10-20', 'amaieraData' => '2025-12-20'
             ],
             // --- Prozesua / Muntaketa ---
@@ -91,7 +96,7 @@ class ZereginaSeeder extends Seeder
              [
                 'izena' => 'Pasaporte Digitala (Blockchain)',
                 'deskribapena' => 'SCLF-ren prozesuaren trazabilidadea ziurtatu.',
-                'faseID' => $faseMerk, // O Web
+                'faseID' => $faseMerk, 
                 'taldeaID' => $getTaldeID('2AW3'),
                 'hasieraData' => '2025-12-01', 'amaieraData' => '2026-01-30'
             ],
@@ -102,7 +107,7 @@ class ZereginaSeeder extends Seeder
                 'estimazioa' => rand(10, 50),
                 'zereginPosizioa' => 1,
                 'status' => 'pending',
-                'arduradunID' => $randomArduradunID // Asignamos un profe cualquiera por ahora
+                'arduradunID' => $randomArduradunID
             ]));
         }
     }
