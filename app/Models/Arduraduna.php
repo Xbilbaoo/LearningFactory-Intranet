@@ -17,7 +17,8 @@ class Arduraduna extends Model
     protected $fillable = [
         'arduradunID',
         'izena',
-        'abizena'
+        'abizena',
+        'userID'
     ];
 
     public function zereginakDitu(): HasMany { return $this->hasMany(Zeregina::class); }
