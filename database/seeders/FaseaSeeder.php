@@ -3,9 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Str;
+use App\Models\Fasea;
 
 class FaseaSeeder extends Seeder
 {
@@ -14,37 +12,15 @@ class FaseaSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('faseas')->insert([
-            [
-                'izena' => 'Sentsibilizazioa',
-                'deskribapena' => 'Proiektua ezagutzeko fasea',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'izena' => 'Diseinua',
-                'deskribapena' => 'Proiektuaren diseinuak garatzeko fasea',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'izena' => 'Fabrikazioa',
-                'deskribapena' => 'Proiektua garatzen den fasea',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'izena' => 'Prozesua',
-                'deskribapena' => 'Garapenaren azken pausuak',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'izena' => 'Bukaera',
-                'deskribapena' => 'Egiaztapenak eta proiektuaren entrega',
-                'created_at' => now(),
-                'updated_at' => now()
-            ]
-        ]);
+        $faseak = [
+            ['izena' => 'Sentsibilizazioa', 'deskribapena' => 'Proiektuaren hasiera eta ezagutza'],
+            ['izena' => 'Diseinua', 'deskribapena' => 'Planoak, arriskuak eta diseinu teknikoa'],
+            ['izena' => 'Merkataritza', 'deskribapena' => 'Marketing eta Web garapena'],
+            ['izena' => 'Prozesua', 'deskribapena' => 'Muntaketa eta fabrikazioa (Mto, Mekatronika)'],
+        ];
+
+        foreach ($faseak as $fase) {
+            Fasea::firstOrCreate(['izena' => $fase['izena']], $fase);
+        }
     }
 }

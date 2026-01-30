@@ -1,10 +1,8 @@
 <?php
 
 namespace Database\Seeders;
-
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
+use App\Models\Taldea;
 
 class TaldeaSeeder extends Seeder
 {
@@ -13,13 +11,18 @@ class TaldeaSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('taldeas')->insert([
-            [
-                'izena' => '2CM3',
-                'deskribapena' => 'Bigarren mailako soldadurako taldea',
-                'created_at' => now(),
-                'updated_at' => now()
-            ]
-        ]);
+        $taldeak = [
+            ['izena' => 'SCLF Arduradunak', 'deskribapena' => 'Proiektuaren kudeatzaile orokorrak'],
+            ['izena' => 'IPE1', 'deskribapena' => 'Lan arriskuen prebentzioa'],
+            ['izena' => '2CM3', 'deskribapena' => 'Diseinu mekanikoa eta egiturak'],
+            ['izena' => 'Merkataritza', 'deskribapena' => 'Marketing taldea'],
+            ['izena' => '2AW3', 'deskribapena' => 'Web Garapena eta Informatika'],
+            ['izena' => 'Mto', 'deskribapena' => 'Muntaketa eta Mantentze lanak'],
+            ['izena' => 'Mecatrónica', 'deskribapena' => 'Mekatronika eta elektrizitatea'],
+        ];
+
+        foreach ($taldeak as $taldea) {
+            Taldea::firstOrCreate(['izena' => $taldea['izena']], $taldea);
+        }
     }
 }
