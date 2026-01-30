@@ -8,7 +8,7 @@ use App\Models\Arduraduna;
 use App\Http\Requests\StoreZereginaRequest;
 use App\Http\Requests\UpdateZereginaRequest;
 use App\Models\Zeregina;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ZereginaController extends Controller
 {
