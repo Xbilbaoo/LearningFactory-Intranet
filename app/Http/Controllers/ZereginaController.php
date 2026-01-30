@@ -17,7 +17,38 @@ class ZereginaController extends Controller
      */
     public function index()
     {
-        $zereginak = Zeregina::with(['fasekoaDa', 'taldeakEginBeharDu', 'arduradunaDa', 'materialakBeharDitu'])->get();
+        $user = Auth::user();
+
+        // 1. Iniciamos la consulta base cargando relaciones
+        $query = Zeregina::with(['fasekoaDa', 'taldeakEginBeharDu', 'arduradunaDa']);
+
+        // 2. Aplicamos filtros según el ROL
+
+        if ($user->role === 'admin') {
+            // ADMIN: Lo ve todo. No filtramos nada.
+
+        } elseif ($user->role === 'arduraduna') {
+            // ARDURADUNA: Solo ve las tareas donde él es el responsable.
+            // Asumimos que la relación $user->arduraduna funciona correctamente.
+            if ($user->arduraduna) {
+                $query->where('arduradunID', $user->arduraduna->arduradunID);
+            } else {
+                // Si el usuario tiene rol arduraduna pero no tiene ficha en la tabla 'arduradunas'
+                $query->whereRaw('0 = 1'); // Truco para devolver lista vacía
+            }
+        } elseif ($user->role === 'ikaslea') {
+            // IKASLEA: Solo ve las de su grupo Y que no estén completadas (activas)
+            if ($user->ikaslea) {
+                $query->where('taldeaID', $user->ikaslea->taldeaID)
+                    ->whereIn('status', ['pending', 'in_progress']); // Asumo que estas son las "activas"
+            } else {
+                $query->whereRaw('0 = 1');
+            }
+        }
+
+        // 3. Ejecutamos la consulta final
+        $zereginak = $query->get();
+
         return view('zereginak.index', compact('zereginak'));
     }
 
@@ -31,7 +62,6 @@ class ZereginaController extends Controller
         $arduradunak = Arduraduna::all();
 
         return view('zereginak.create', compact('faseak', 'taldeak', 'arduradunak'));
-
     }
 
     /**
@@ -56,6 +86,20 @@ class ZereginaController extends Controller
      */
     public function edit(Zeregina $zeregina)
     {
+
+        $user = Auth::user();
+
+        // BLOQUEO DE SEGURIDAD
+        if ($user->role === 'ikaslea') {
+            abort(403); // Prohibido
+        }
+        if ($user->role === 'arduraduna') {
+            // Si es responsable, verificamos que sea SU tarea
+            if (!$user->arduraduna || $zeregina->arduradunID !== $user->arduraduna->arduradunID) {
+                abort(403, 'Ez daukazu baimenik zeregin hau editatzeko.');
+            }
+        }
+
         $faseak = Fasea::all();
         $taldeak = Taldea::all();
         $arduradunak = Arduraduna::all();
@@ -81,6 +125,5 @@ class ZereginaController extends Controller
         $zeregina->delete();
 
         return redirect()->route('zereginak.index')->with('success', 'Zeregina ezabatu egin da.');
-
     }
 }
