@@ -22,7 +22,10 @@ class Zeregina extends Model
         'hasieraData',
         'amaieraData',
         'zereginPosizioa',
-        'status'
+        'status',
+        'faseID',
+        'taldeID',
+        'arduradunID'
     ];
 
     public function taldeakEginBeharDu(): BelongsTo { return $this->belongsTo(Taldea::class); }

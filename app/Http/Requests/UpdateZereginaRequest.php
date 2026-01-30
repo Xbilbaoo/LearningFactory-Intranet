@@ -29,9 +29,9 @@ class UpdateZereginaRequest extends FormRequest
             'amaieraData' => 'required|date|after:hasieraData',
             'zereginPosizio' => 'required|integer|min:1',
             'status' => 'required|string',
-            'taldea' => 'required|exists:taldeas,taldeID',
-            'fasea_id' => 'required|exists:faseas,faseID',
-            'arduraduna' => 'required|exists:arduradunas,arduradunID',
+            'taldeID' => 'required|exists:taldeas,taldeID',
+            'faseID' => 'required|exists:faseas,faseID',
+            'arduradunID' => 'required|exists:arduradunas,arduradunID',
 
         ];
     }
