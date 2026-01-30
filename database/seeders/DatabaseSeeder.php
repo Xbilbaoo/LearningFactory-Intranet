@@ -19,7 +19,9 @@ class DatabaseSeeder extends Seeder
             FaseaSeeder::class,
             TaldeaSeeder::class,
             UserSeeder::class,
-            IkasleaSeeder::class
+            IkasleaSeeder::class,
+            ArduradunaSeeder::class,
+            ZereginaSeeder::class
         ]);
     }
 }
