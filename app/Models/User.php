@@ -50,5 +50,5 @@ class User extends Authenticatable
     }
 
     public function ikaslea(): HasOne { return $this->hasOne(Ikaslea::class); }
-    public function arduraduna(): HasOne { return $this->hasOne(Arduraduna::class); }
+    public function arduraduna(): HasOne { return $this->hasOne(Arduraduna::class, 'userID', 'userID'); }
 }

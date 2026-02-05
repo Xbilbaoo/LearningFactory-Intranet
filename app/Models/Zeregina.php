@@ -30,7 +30,7 @@ class Zeregina extends Model
 
     public function taldeakEginBeharDu(): BelongsTo { return $this->belongsTo(Taldea::class); }
 
-    public function arduradunaDa(): BelongsTo { return $this->belongsTo(Arduraduna::class); }
+    public function arduradunaDa(): BelongsTo { return $this->belongsTo(Arduraduna::class, 'arduradunID', 'arduradunID'); }
 
     public function fasekoaDa(): BelongsTo { return $this->belongsTo(Fasea::class); }
 
