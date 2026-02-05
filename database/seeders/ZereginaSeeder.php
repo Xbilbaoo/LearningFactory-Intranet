@@ -13,8 +13,10 @@ class ZereginaSeeder extends Seeder
 {
     public function run(): void
     {
-        // Función auxiliar segura: Si no encuentra el nombre, devuelve el ID 1
-        // Usamos el operador ?-> para que no falle si es null
+        // Obtenemos todos los IDs de los responsables disponibles
+        $arduradunIDs = Arduraduna::pluck('arduradunID')->toArray();
+
+        // 1. Helpers para buscar IDs sin que falle si no existen
         $getFaseID = function($nombre) {
             return Fasea::where('izena', $nombre)->first()?->faseID ?? 1;
         };
@@ -23,14 +25,19 @@ class ZereginaSeeder extends Seeder
             return Taldea::where('izena', 'LIKE', "%{$nombre}%")->first()?->taldeID ?? 1;
         };
 
-        // Cogemos el primer responsable que exista, o el 1 si falla
-        $randomArduradunID = Arduraduna::first()?->arduradunID ?? 1;
-
-        // IDs seguros de fases
+        // 2. Definimos las variables que faltaban (ESTO ES LO QUE DABA ERROR)
         $faseSents = $getFaseID('Sentsibilizazioa');
         $faseDis   = $getFaseID('Diseinua');
         $faseMerk  = $getFaseID('Merkataritza');
         $faseProz  = $getFaseID('Prozesua');
+
+        // 3. Obtenemos responsables reales
+        $arduradunIDs = Arduraduna::pluck('arduradunID')->toArray();
+
+        // Si no hay responsables, usamos [1] por defecto para evitar errores
+        if (empty($arduradunIDs)) {
+            $arduradunIDs = [1];
+        }
 
         $zereginak = [
             // --- Sentsibilizazioa ---
@@ -93,7 +100,7 @@ class ZereginaSeeder extends Seeder
                 'taldeID' => $getTaldeID('Mecatrónica'),
                 'hasieraData' => '2026-01-15', 'amaieraData' => '2026-02-01'
             ],
-             [
+            [
                 'izena' => 'Pasaporte Digitala (Blockchain)',
                 'deskribapena' => 'SCLF-ren prozesuaren trazabilidadea ziurtatu.',
                 'faseID' => $faseMerk,
@@ -107,8 +114,10 @@ class ZereginaSeeder extends Seeder
                 'estimazioa' => rand(10, 50),
                 'zereginPosizioa' => 1,
                 'status' => 'Pendiente',
-                'arduradunID' => $randomArduradunID
+                // Asignamos un responsable aleatorio de la lista real
+                'arduradunID' => $arduradunIDs[array_rand($arduradunIDs)]
             ]));
         }
     }
 }
+

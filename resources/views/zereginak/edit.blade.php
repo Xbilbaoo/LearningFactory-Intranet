@@ -8,13 +8,12 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                
                 <form action="{{ route('zereginak.update', $zeregina) }}" method="POST">
                     @csrf
                     @method('PUT') <div class="mb-4">
                         <label for="izena" class="block text-gray-700 text-sm font-bold mb-2">Izena:</label>
-                        <input type="text" name="izena" id="izena" 
-                               value="{{ old('izena', $zeregina->izena) }}" 
+                        <input type="text" name="izena" id="izena"
+                               value="{{ old('izena', $zeregina->izena) }}"
                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                         @error('izena') <p class="text-red-500 text-xs italic">{{ $message }}</p> @enderror
                     </div>
@@ -73,14 +72,14 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="mb-4">
                             <label for="hasieraData" class="block text-gray-700 text-sm font-bold mb-2">Hasiera Data:</label>
-                            <input type="date" name="hasieraData" id="hasieraData" 
-                                   value="{{ old('hasieraData', $zeregina->hasieraData) }}" 
+                            <input type="date" name="hasieraData" id="hasieraData"
+                                   value="{{ old('hasieraData', $zeregina->hasieraData) }}"
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                         </div>
                         <div class="mb-4">
                             <label for="amaieraData" class="block text-gray-700 text-sm font-bold mb-2">Amaiera Data:</label>
-                            <input type="date" name="amaieraData" id="amaieraData" 
-                                   value="{{ old('amaieraData', $zeregina->amaieraData) }}" 
+                            <input type="date" name="amaieraData" id="amaieraData"
+                                   value="{{ old('amaieraData', $zeregina->amaieraData) }}"
                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                         </div>
                     </div>

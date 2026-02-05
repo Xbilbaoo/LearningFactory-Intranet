@@ -14,7 +14,7 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
 
-    Route::resource('zereginak', ZereginaController::class);
+    Route::resource('zereginak', ZereginaController::class)->parameters(['zereginak' => 'zeregina']);
     Route::middleware('role:admin')->group(function() {
 
         Route::get('/admin/panel', function() {
