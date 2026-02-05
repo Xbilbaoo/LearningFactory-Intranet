@@ -18,13 +18,6 @@
                 class="inline-block px-4 py-1.5 rounded-sm text-sm text-gray-700 hover:text-gray-900 border border-transparent hover:border-gray-300">
                 Iniciar sesión
             </a>
-
-            @if (Route::has('register'))
-                <a href="{{ route('register') }}"
-                    class="inline-block px-4 py-1.5 rounded-sm text-sm text-white bg-orange-500 hover:bg-orange-600">
-                    Registrarse
-                </a>
-            @endif
         @endauth
     @endif
 @endsection

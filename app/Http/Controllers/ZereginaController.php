@@ -37,13 +37,20 @@ class ZereginaController extends Controller
                 $query->whereRaw('0 = 1'); // Truco para devolver lista vacía
             }
         } elseif ($user->role === 'ikaslea') {
-            // IKASLEA: Solo ve las de su grupo Y que no estén completadas (activas)
+
+            // Verificamos si el usuario tiene ficha de ikaslea asignada
             if ($user->ikaslea) {
-                $query->where('taldeID', $user->ikaslea->taldeaID)
-                    ->whereIn('status', ['pending', 'in_progress']); // Asumo que estas son las "activas"
+                // Filtramos por el ID del grupo del alumno
+                $query->where('taldeID', $user->ikaslea->taldeID);
+
+                // OPCIONAL: Si solo quieres que vean las tareas pendientes o en proceso
+                // Asegúrate de usar las MISMAS palabras que usas en la base de datos (Pendiente, Egiten...)
+                // $query->whereIn('status', ['Pendiente', 'Egiten']);
             } else {
+                // Si es ikaslea pero no tiene ficha, no mostramos nada
                 $query->whereRaw('0 = 1');
             }
+
         }
 
         // 3. Ejecutamos la consulta final
@@ -122,6 +129,10 @@ class ZereginaController extends Controller
      */
     public function destroy(Zeregina $zeregina)
     {
+        if (auth()->user()->role === 'ikaslea') {
+            abort(403, 'Ez daukazu baimenik zereginak ezabatzeko.');
+        }
+
         $zeregina->delete();
 
         return redirect()->route('zereginak.index')->with('success', 'Zeregina ezabatu egin da.');
