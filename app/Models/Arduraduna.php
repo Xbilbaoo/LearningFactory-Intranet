@@ -23,6 +23,6 @@ class Arduraduna extends Model
 
     public function zereginakDitu(): HasMany { return $this->hasMany(Zeregina::class); }
 
-    public function erabiltzaileaDa(): BelongsTo { return $this->belongsTo(User::class); }
+    public function erabiltzaileaDa(): BelongsTo { return $this->belongsTo(User::class,'userID', 'userID'); }
 
 }
