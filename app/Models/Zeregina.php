@@ -28,11 +28,11 @@ class Zeregina extends Model
         'arduradunID'
     ];
 
-    public function taldeakEginBeharDu(): BelongsTo { return $this->belongsTo(Taldea::class); }
+    public function taldeakEginBeharDu(): BelongsTo { return $this->belongsTo(Taldea::class, 'taldeID', 'taldeID'); }
 
     public function arduradunaDa(): BelongsTo { return $this->belongsTo(Arduraduna::class, 'arduradunID', 'arduradunID'); }
 
-    public function fasekoaDa(): BelongsTo { return $this->belongsTo(Fasea::class); }
+    public function fasekoaDa(): BelongsTo { return $this->belongsTo(Fasea::class, 'faseID', 'faseID'); }
 
     public function materialakBeharDitu() : BelongsToMany { return $this->belongsToMany(Materiala::class, "material_zeregin", "zereginID", "materialID"); }
 

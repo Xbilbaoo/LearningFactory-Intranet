@@ -39,7 +39,7 @@ class ZereginaController extends Controller
         } elseif ($user->role === 'ikaslea') {
             // IKASLEA: Solo ve las de su grupo Y que no estén completadas (activas)
             if ($user->ikaslea) {
-                $query->where('taldeaID', $user->ikaslea->taldeaID)
+                $query->where('taldeID', $user->ikaslea->taldeaID)
                     ->whereIn('status', ['pending', 'in_progress']); // Asumo que estas son las "activas"
             } else {
                 $query->whereRaw('0 = 1');

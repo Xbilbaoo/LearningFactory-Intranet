@@ -11,7 +11,7 @@ class UpdateZereginaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return $this->user()->role === 'admin' || $this->user()->role === 'arduraduna';
     }
 
     /**
@@ -22,12 +22,12 @@ class UpdateZereginaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'izena' => 'requiered|string|max:255',
-            'deskribapena' => 'requiered|string',
+            'izena' => 'required|string|max:255',
+            'deskribapena' => 'required|string',
             'estimazioa' => 'required|integer|min:1',
             'hasieraData' => 'required|date',
             'amaieraData' => 'required|date|after:hasieraData',
-            'zereginPosizio' => 'required|integer|min:1',
+            'zereginPosizioa' => 'required|integer|min:1',
             'status' => 'required|string',
             'taldeID' => 'required|exists:taldeas,taldeID',
             'faseID' => 'required|exists:faseas,faseID',
